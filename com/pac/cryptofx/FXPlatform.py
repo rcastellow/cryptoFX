@@ -76,7 +76,7 @@ class FXPlatform(AbstractPlatform):
     def decisionRules(self):                 
         # TODO: Abstract the MeanReversion into a generic Algorithm module
         meanReversion = MeanReversion(self.config)
-        ticker = meanReversion.pollPrice(self.exchangePlugins,self.currencyPair)
+        ticker = meanReversion.pollPrice(self.exchangePlugins)
         
         self.buyPrices.append(ticker['buy'])
         self.sellPrices.append(ticker['sell'])

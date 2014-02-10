@@ -49,6 +49,6 @@ fxCoinPlatform = FXPlatform(config,exchangePlugins)
 timerManager = TimerManager(fxCoinPlatform)
 
 interval=int(config['scheduler.interval'])
-periodicMovingWindow=int(config['scheduler.periodicMovingWindow'])
-timerManager.runScheduler('XLTCZUSD',interval,periodicMovingWindow)
+periodicMovingWindow=int(config['scheduler.windowSize'])
+timerManager.runScheduler(interval,periodicMovingWindow)
 

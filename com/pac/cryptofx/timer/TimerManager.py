@@ -23,7 +23,7 @@ class TimerManager:
         self.currentPlatform.decisionRules()
           
     
-    def runScheduler(self, currencyPair, interval, periodicMovingWindow):
+    def runScheduler(self, interval, periodicMovingWindow):
         self.currentPlatform.logger.info("Started Scheduler.")
         sched = Scheduler()
         sched.add_interval_job(self.scheduledJob1, minutes=interval)
