@@ -38,9 +38,14 @@ class ExchangePlugin:
         from btce.BTCEExchangePlugin import BTCEExchangePlugin
         from campbx.CampBXExchangePlugin import CampBXExchangePlugin
         from kraken.KrakenExchangePlugin import KrakenExchangePlugin
+        from cryptsy.CryptsyExchangePlugin import CryptsyExchangePlugin
+        from bitfinex.BitfinexExchangePlugin import BitfinexExchangePlugin
         
         #return eval(type + "()")
         if exchangeType == "CampBXExchangePlugin": return CampBXExchangePlugin(config)
         if exchangeType == "BTCEExchangePlugin": return BTCEExchangePlugin(config)
         if exchangeType == "KrakenExchangePlugin": return KrakenExchangePlugin(config)
+        if exchangeType == "CryptsyExchangePlugin": return CryptsyExchangePlugin(config)
+        if exchangeType == "BitfinexExchangePlugin": return BitfinexExchangePlugin(config)       
+        
         assert 0, "Invalid exchange type: " + exchangeType

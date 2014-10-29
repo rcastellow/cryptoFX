@@ -42,7 +42,7 @@ if __name__ == '__main__':
 config = ConfigObj('cryptofx.properties')
 
 #  Use BTC-e exchange APIs
-exchangePlugins = ["KrakenExchangePlugin"]
+exchangePlugins = ["KrakenExchangePlugin","BTCEExchangePlugin","CampBXExchangePlugin"]
 fxCoinPlatform = FXPlatform(config,exchangePlugins)
 
 #btce should use ltc_usd

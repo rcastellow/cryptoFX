@@ -1,6 +1,7 @@
 from AbstractPlatform import AbstractPlatform
 from exchange.ExchangePlugin import ExchangePlugin
 from com.pac.cryptofx.algorithm.MeanReversion import MeanReversion
+from com.pac.cryptofx.algorithm.Arbitrage import Arbitrage
 import logging
 
 '''
@@ -73,21 +74,35 @@ class FXPlatform(AbstractPlatform):
         historyField.append(ticker['sell'])
         self.writeToHistoryFile(self.formatCurrentPrice(historyField))
     
-    def decisionRules(self):                 
-        # TODO: Abstract the MeanReversion into a generic Algorithm module
+    #TODO: Abstract this method into the algorithm package
+    def execute(self):
         meanReversion = MeanReversion(self.config)
         ticker = meanReversion.pollPrice(self.exchangePlugins)
         
         self.buyPrices.append(ticker['buy'])
-        self.sellPrices.append(ticker['sell'])
-        
+        self.sellPrices.append(ticker['sell'])  
         self.balance = meanReversion.trade(self.logger,self.exchangePlugins,ticker,self.balance,
                                            self.buyPrices)
+        
         self.logBalance(ticker)         
 
         periodicMovingWindow = int(self.config['algorithm.meanReversion.periodicMovingWindow'])
         if (len(self.buyPrices) > 2 * (periodicMovingWindow)):     
             del self.buyPrices[0]
-            del self.sellPrices[0]
+            del self.sellPrices[0]        
+    
+    def Arbitrage(self):    # TODO: This needs to be configurable to plugin various algorithms             
+        
+        arbitrage = Arbitrage(self.config);
+        for exchangePlugin in self.exchangePlugins:
+            print exchangePlugin
+            ticker = arbitrage.pollPrices(exchangePlugin)
+            print ticker
+        
+#         self.buyPrices.append(ticker['buy'])
+#         self.sellPrices.append(ticker['sell'])  
+
+        self.logBalance(ticker)         
+
 
         
