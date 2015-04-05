@@ -20,7 +20,7 @@ class TimerManager:
         
         
     def scheduledJob1(self):        
-        self.currentPlatform.decisionRules()
+        self.currentPlatform.execute()
           
     
     def runScheduler(self, interval, periodicMovingWindow):
